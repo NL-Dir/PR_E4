@@ -1,5 +1,5 @@
 # PR_E4
-команда для создения контейнеров:
+команда для создания контейнеров:\n
 sudo docker-compose -f  docker-compose.final.yml up -d
-панель администратора:
+\n панель администратора:\n
 localhost:1337/admin
