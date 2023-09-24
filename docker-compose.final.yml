@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  web:
+    image: klochkovva/sf_pr_e4:web-latest
+    command: gunicorn hello_django.wsgi:application --bind 0.0.0.0:8000
+    expose:
+      - 8000
+    env_file:
+      - ./.env.prod
+    depends_on:
+      - db
+  db:
+    image: postgres:13.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./.env.prod.db
+  nginx:
+    image: klochkovva/sf_pr_e4:nginx-latest
+    ports:
+      - 1337:80
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
